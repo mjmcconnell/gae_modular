@@ -17,6 +17,7 @@ The standard modules with be setup with the following structure:
             form.py
             templates.py
             apis.py
+            templates/
             tests/
 
 All interactions between modules should be exposed via functions in the `__init__.py` file, so that there
