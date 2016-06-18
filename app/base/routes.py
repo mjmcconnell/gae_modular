@@ -2,7 +2,6 @@
 # stdlib imports
 import os
 import re
-import importlib
 
 # local imports
 from base.config import ROOT_DIR
