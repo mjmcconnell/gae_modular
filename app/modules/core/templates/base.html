@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/modules/core/static/libs/material-1.1.0-rc.5/angular-material.min.css">
+    </head>
+    <body layout="column">
+        <md-content flex id="main">
+
+            <div layout="column" flex id="content">
+
+                {% block content %}{% endblock %}
+
+            </div>
+        </md-content>
+
+        <!-- Angular Material requires Angular.js Libraries -->
+        <script src="/modules/core/static/libs/angularjs-1.5.6/angular.min.js"></script>
+        <script src="/modules/core/static/libs/angularjs-1.5.6/angular-animate.min.js"></script>
+        <script src="/modules/core/static/libs/angularjs-1.5.6/angular-aria.min.js"></script>
+        <script src="/modules/core/static/libs/angularjs-1.5.6/angular-messages.min.js"></script>
+
+        <!-- Angular Material Library -->
+        <script src="/modules/core/static/libs/material-1.1.0-rc.5/angular-material.min.js"></script>
+    </body>
+</html>

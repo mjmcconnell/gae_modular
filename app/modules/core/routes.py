@@ -1,7 +1,5 @@
-"""Route/URL definitions for the app"""
-# stdlib imports
-import itertools
+"""Route/URL definitions for all modules"""
+# local imports
+from modules.home.routes import ROUTES as H_ROUTES
 
-ROUTES = list(itertools.chain(
-    # Insert module routes here
-))
+ROUTES = H_ROUTES

@@ -10,7 +10,7 @@ from modules.core import routes
 
 
 app = webapp2.WSGIApplication(
-    routes=(routes.ROUTES),
+    routes=routes.ROUTES,
     debug=config.DEBUG,
     config=config.CONFIG
 )

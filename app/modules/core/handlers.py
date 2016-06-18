@@ -2,6 +2,8 @@
 """
 # stdlib imports
 import jinja2
+import inspect
+import os
 import webapp2
 
 # third-party imports
@@ -15,17 +17,17 @@ from modules.core import config
 class BaseHandler(webapp2.RequestHandler):
     """Base handler for servicing unauthenticated user requests."""
 
-    def __init__(self, request, response):
-        # Get a session store for this request.
-        self.session_store = sessions.get_store(request=self.request)
-
     @webapp2.cached_property
     def current_user(self):
         return users.get_current_user()
 
     def dispatch(self):
+        # Get a session store for this request.
+        self.session_store = sessions.get_store(request=self.request)
+
         try:
-            super(BaseHandler, self).dispatch()
+            # Dispatch the request.
+            webapp2.RequestHandler.dispatch(self)
         finally:
             # Save all sessions.
             self.session_store.save_sessions(self.response)
@@ -37,11 +39,20 @@ class BaseHandler(webapp2.RequestHandler):
 
     @webapp2.cached_property
     def jinja2(self):
+        # Directory of the "core" module, used for global templates
+        base_dir = os.path.join(os.path.dirname(__file__))
+        # Directory of the handler used for rendering the template,
+        # for module specific templates
+        current_dir = os.path.dirname(inspect.getfile(self.__class__))
+
+        dirs = [base_dir, current_dir]
+        template_dirs = [os.path.join(x, 'templates') for x in dirs]
+
         extensions = ['jinja2.ext.autoescape', 'jinja2.ext.with_']
         env = jinja2.Environment(
             autoescape=True,
             auto_reload=config.DEBUG,
-            loader=jinja2.FileSystemLoader(constants.TEMPLATE_DIR),
+            loader=jinja2.FileSystemLoader(template_dirs),
             extensions=extensions,
         )
         for k, v in self.app.config['jinja2']['filters'].items():

@@ -1,7 +1,7 @@
 # Visit the url below for a reference of all configuration
 # https://cloud.google.com/appengine/docs/python/config/appref
 
-application: your_app_id  # The "Project ID" creted at https://console.cloud.google.com/iam-admin/projects
+application: your-app-id  # The "Project ID" creted at https://console.cloud.google.com/iam-admin/projects
 version: 1
 runtime: python27
 api_version: 1
@@ -18,7 +18,7 @@ handlers:
   upload: modules/([^/]*)/static/(.*)
   static_files: modules/\1/_static/\2
 - url: /.*
-  script: main.app
+  script: modules.core.wsgi.app
   secure: always
 
 skip_files:
