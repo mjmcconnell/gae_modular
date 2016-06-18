@@ -7,6 +7,12 @@ runtime: python27
 api_version: 1
 threadsafe: false
 
+env_variables:
+  ENABLED_MODULES:
+    pages
+    gallery
+    home
+
 libraries:
 - name: jinja2
   version: "2.6"

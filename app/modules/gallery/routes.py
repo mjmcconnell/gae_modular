@@ -2,5 +2,5 @@
 # third-party imports
 
 ROUTES = [
-    (r'/gallery', 'modules.gallery.templates.Frontend'),
+    (r'/gallery', 'modules.gallery.handlers.templates.Frontend'),
 ]

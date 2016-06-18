@@ -1,5 +1,8 @@
 """Base handlers for modules
 """
+# future imports
+from __future__ import absolute_import
+
 # stdlib imports
 import jinja2
 import inspect
@@ -55,7 +58,7 @@ class BaseTemplateHandler(BaseHandler):
         current_dir = os.path.dirname(inspect.getfile(self.__class__))
 
         dirs = [base_dir, current_dir]
-        template_dirs = [os.path.join(x, 'templates') for x in dirs]
+        template_dirs = [os.path.join(x, os.pardir, 'templates') for x in dirs]
 
         extensions = ['jinja2.ext.autoescape', 'jinja2.ext.with_']
         env = jinja2.Environment(

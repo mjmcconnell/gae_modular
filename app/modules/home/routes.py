@@ -2,5 +2,5 @@
 # third-party imports
 
 ROUTES = [
-    (r'/', 'modules.home.templates.Frontend'),
+    (r'/', 'modules.home.handlers.templates.Frontend'),
 ]
