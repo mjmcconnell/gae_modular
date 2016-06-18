@@ -14,9 +14,12 @@ libraries:
   version: "2.5.2"
 
 handlers:
+- url: /static/(.*)
+  upload: static/(.*)
+  static_files: static/\1
 - url: /modules/([^/]*)/static/(.*)
   upload: modules/([^/]*)/static/(.*)
-  static_files: modules/\1/_static/\2
+  static_files: modules/\1/static/\2
 - url: /.*
   script: base.wsgi.app
   secure: always
