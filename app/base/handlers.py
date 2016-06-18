@@ -11,7 +11,7 @@ from google.appengine.api import users
 from webapp2_extras import sessions
 
 # local imports
-from modules.core import config
+from base import config
 
 
 class BaseHandler(webapp2.RequestHandler):

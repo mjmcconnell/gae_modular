@@ -6,7 +6,7 @@ import os
 from google.appengine.api import app_identity
 
 # local imports
-from modules.core.models import get_session_key
+from base.models import get_session_key
 
 SERVER_SOFTWARE = os.environ.get('SERVER_SOFTWARE', 'Development')
 DEBUG = SERVER_SOFTWARE.startswith('Development')
@@ -23,7 +23,7 @@ else:
     session_key = get_session_key()
 
 # Root director of the app
-ROOT_DIR = os.path.join(os.path.dirname(__file__), os.pardir, os.pardir)
+ROOT_DIR = os.path.join(os.path.dirname(__file__), os.pardir)
 
 CONFIG = {
     # Configure global context/filters/settings for Jinja2
