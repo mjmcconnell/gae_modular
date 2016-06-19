@@ -1,13 +1,11 @@
-from base.handler import templates
+# Local imports
+from modules.pages.templates import ModelListTemplatetHandler
+from modules.pages.templates import ModelDetailTemplateHandler
 
 
-class PublicPageTemplateHandler(templates.PublicTemplateHandler):
+class AdminLisTemplatetHandler(ModelListTemplatetHandler):
     pass
 
 
-class AdminPageListTemplatetHandler(templates.AdminLisTemplatetHandler):
-    pass
-
-
-class AdminPageDetailTemplateHandler(templates.AdminDetailTemplateHandler):
+class AdminDetailTemplateHandler(ModelDetailTemplateHandler):
     pass

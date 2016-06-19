@@ -95,7 +95,7 @@ class ModelListTemplatetHandler(BaseTemplateHandler):
         self.template_values.update({
             'json_records': json.dumps(records),
         })
-        self.render('rest/list.html', self.template_values)
+        self.render('model/list.html', self.template_values)
 
 
 class ModelDetailTemplateHandler(BaseTemplateHandler):
@@ -140,4 +140,4 @@ class ModelDetailTemplateHandler(BaseTemplateHandler):
             self.template_values.update({
                 'json_record': json.dumps(record.to_dict()),
             })
-        self.render('rest/form.html', self.template_values)
+        self.render('model/form.html', self.template_values)

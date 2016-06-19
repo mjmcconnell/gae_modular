@@ -39,35 +39,3 @@ class BaseHandler(webapp2.RequestHandler):
     def session(self):
         # Returns a session using the default cookie key.
         return self.session_store.get_session()
-
-
-class BaseCronHandler(BaseHandler):
-    """Base handler for servicing Cron requests.
-    """
-
-    def dispatch(self):
-        """Ensure the "X-Appengine-Cron" header is set to "true"
-
-        Ref: (https://cloud.google.com/appengine/docs/python/config/cron
-        #securing_urls_for_cron)
-        """
-        header = self.request.headers.get('X-AppEngine-Cron', 'false')
-        if header != 'true':
-            raise SecurityError('X-AppEngine-Cron header missing')
-        super(BaseCronHandler, self).dispatch()
-
-
-class BaseTaskHandler(BaseHandler):
-    """Base handler for task requests.
-    """
-
-    def dispatch(self):
-        """Ensure a valid "X-Appengine-Cron" header is passed in the requests
-
-        Ref: (https://cloud.google.com/appengine/docs/python/taskqueue/push/
-        creating-handlers#securing_task_handler_urls)
-        """
-        header = self.request.headers.get('X-AppEngine-QueueName', None)
-        if not header:
-            raise SecurityError('X-AppEngine-QueueName header missing')
-        super(BaseTaskHandler, self).dispatch()

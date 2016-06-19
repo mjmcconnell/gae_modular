@@ -1,18 +1,8 @@
 # Local imports
-from modules.pages.templates import PublicPageTemplateHandler
-from modules.pages.templates import AdminPageListTemplatetHandler
-from modules.pages.templates import AdminPageDetailTemplateHandler
+from modules.pages.templates import BaseTemplateHandler
 
 
-class PublicTemplateHandler(PublicPageTemplateHandler):
+class PublicTemplateHandler(BaseTemplateHandler):
 
     def get(self):
         self.render('gallery.html')
-
-
-class AdminLisTemplatetHandler(AdminPageListTemplatetHandler):
-    pass
-
-
-class AdminDetailTemplateHandler(AdminPageDetailTemplateHandler):
-    pass
