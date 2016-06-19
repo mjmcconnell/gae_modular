@@ -1,21 +1,13 @@
-"""Generic admin api method used for altering records in the datastore.
+"""Base api handlers for modules
 """
 # stdlib imports
 import json
 
 # local imports
-from modules.portal.app.handlers.base import AdminAjaxHandler
+from base.handlers.common import BaseHandler
 
 
-class BaseApiHandler(AdminAjaxHandler):
-
-    form = None
-    model = None
-
-    def _get_record(self, key):
-        """Fetches a record using the key, passed into the url.
-        """
-        return self.model.get_by_urlsafe_key(key)
+class BaseApiHandler(BaseHandler):
 
     def render_json(self, **kwargs):
         """Returns a json response
@@ -28,6 +20,17 @@ class BaseApiHandler(AdminAjaxHandler):
             kwargs['data'] = None
 
         self.response.write(json.dumps(kwargs))
+
+
+class ModelHandler(BaseApiHandler):
+
+    form = None
+    model = None
+
+    def _get_record(self, key):
+        """Fetches a record using the key, passed into the url.
+        """
+        return self.model.get_by_urlsafe_key(key)
 
     def submit_form(self, record=None):
         return_data = {}
@@ -70,29 +73,25 @@ class BaseApiHandler(AdminAjaxHandler):
             return True, None
         else:
             msg = ('There are errors on your form, please correct these, ',
-                    'before trying to submit the form again.')
+                   'before trying to submit the form again.')
 
         return False, msg
 
 
-class AdminApiListHandler(BaseApiHandler):
+class ListMixin(object):
 
     def get(self, *args, **kwargs):
         """Save form data to the datastore
         """
         records = self.model.fetch_cached_dataset()
         return self.render_json({
-            'status': 'success',
+            'count': len(records),
             'data': records,
+            'status': 'success',
         })
 
-    def post(self, *args, **kwargs):
-        """Save form data to the datastore
-        """
-        self.submit_form()
 
-
-class AdminApiDetailHandler(BaseApiHandler):
+class ReadMixin(object):
 
     def get(self, key, *args, **kwargs):
         record = self._get_record(key)
@@ -108,6 +107,17 @@ class AdminApiDetailHandler(BaseApiHandler):
             'data': record,
         })
 
+
+class CreateMixin(object):
+
+    def post(self, *args, **kwargs):
+        """Save form data to the datastore
+        """
+        self.submit_form()
+
+
+class UpdatelMixin(object):
+
     def post(self, key, *args, **kwargs):
         record = self._get_record(key)
         if record is None:
@@ -119,11 +129,8 @@ class AdminApiDetailHandler(BaseApiHandler):
 
         self._submit_form(record)
 
-    def put(self, key, *args, **kwargs):
-        self.post(key, args, kwargs)
 
-    def patch(self, key, *args, **kwargs):
-        self.post(key, args, kwargs)
+class DeleteMixin(object):
 
     def delete(self, key, *args, **kwargs):
         """Update the records position field.
@@ -140,7 +147,7 @@ class AdminApiDetailHandler(BaseApiHandler):
         return self.render_json()
 
 
-class AdminApiPositionHandler(BaseApiHandler):
+class PositionMixin(object):
     """Updates the user defined position of each models record in the datastore
 
     Expects a list of objects with an "key" attribrute for each record
@@ -149,8 +156,30 @@ class AdminApiPositionHandler(BaseApiHandler):
     def post(self, *args, **kwargs):
         """Update the records position field.
         """
+        records = []
         post_data = self.request.POST
         for i, key in enumerate(json.loads((post_data['keys']))):
             record = self._get_record(key)
             setattr(record, 'order', i)
             record.put()
+            records.append(record.to_dict())
+
+        return self.render_json({
+            'status': 'success',
+            'data': records,
+        })
+
+
+class ListCreateMixin(ListMixin, CreateMixin):
+
+    pass
+
+
+class ReadUpdateMixin(ReadMixin, UpdatelMixin):
+
+    pass
+
+
+class ReadUpdateDeleteMixin(ReadMixin, UpdatelMixin, DeleteMixin):
+
+    pass
