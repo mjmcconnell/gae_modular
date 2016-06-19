@@ -9,9 +9,10 @@ threadsafe: false
 
 env_variables:
   ENABLED_MODULES:
-    pages
-    gallery
-    home
+    modules.admin.admin
+    modules.pages.pages
+    modules.gallery.gallery
+    modules.home.home
 
 libraries:
 - name: jinja2
