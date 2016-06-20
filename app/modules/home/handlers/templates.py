@@ -1,8 +1,8 @@
 # Local imports
-from base.handlers.base import BaseTemplateHandler
+from modules.pages.handlers.templates import PageHandler
 
 
-class Frontend(BaseTemplateHandler):
+class Frontend(PageHandler):
 
     def get(self):
         self.render('home.html')

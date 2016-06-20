@@ -4,7 +4,7 @@ from modules.home.models import HomePage
 
 def register_module():
     routes = [
-        (r'/', 'modules.home.handlers.templates.PublicTemplateHandler'),
+        (r'/', 'modules.home.handlers.templates.Frontend'),
     ]
 
     def on_load():

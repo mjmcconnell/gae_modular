@@ -1,8 +1,8 @@
 # Local imports
-from modules.pages.templates import BaseTemplateHandler
+from modules.pages.handlers.templates import PageHandler
 
 
-class PublicTemplateHandler(BaseTemplateHandler):
+class Frontend(PageHandler):
 
     def get(self):
         self.render('gallery.html')
