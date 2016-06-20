@@ -190,3 +190,43 @@ class BaseModel(ndb.Model):
         form.populate_obj(self)
         # Save the record to the datastore
         return self.put().get()
+
+
+class OrderMixin(object):
+    """Mixin to handle a user defined sort order.
+    """
+
+    sort_order = 'order'
+
+    order = ndb.IntegerProperty()
+
+    def _post_put_hook(self, future):
+        """Ensure order value is set, if not then set it to the
+        total number of current records
+        """
+        if self.order is None:
+            self.order = self.query().count()
+            self.put()
+
+        memcache.flush_all()
+
+    @classmethod
+    def _post_delete_hook(cls, key, future):
+        super(OrderMixin, cls)._post_delete_hook(key, future)
+        # If the records have ordering applied, reset the ordering,
+        # to prevent spaces in the order system.
+        if hasattr(cls, 'order'):
+            records = cls.query().order(cls.order)
+            for i, r in enumerate(records):
+                r.order = i
+                r.put()
+
+    @classmethod
+    def create(cls, form, defaults=None):
+        """Set the initial order value for the record."""
+        if defaults is None:
+            defaults = {}
+
+        defaults['order'] = cls.query().count()
+
+        return super(OrderMixin, cls).create(form, defaults)

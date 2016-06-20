@@ -13,6 +13,7 @@ def register_module():
         GalleryPage.register()
 
     return Module(
+        name='gallery',
         routes=routes,
         on_load=on_load
     )

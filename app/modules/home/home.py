@@ -13,6 +13,7 @@ def register_module():
         HomePage.register()
 
     return Module(
+        name='home',
         routes=routes,
         on_load=on_load
     )

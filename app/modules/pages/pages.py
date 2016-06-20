@@ -18,5 +18,6 @@ def register_module():
     ]
 
     return Module(
+        name='pages',
         routes=routes
     )
