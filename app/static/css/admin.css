@@ -1,0 +1,64 @@
+/* GLOBAL */
+html, body, md-content { background: #f5f5f5; /* SIDE NAV */ }
+
+html .center, body .center, md-content .center { text-align: center !important; }
+
+html .align-right, body .align-right, md-content .align-right { text-align: right !important; }
+
+html .pull-right, body .pull-right, md-content .pull-right { float: right; }
+
+html .md-button, body .md-button, md-content .md-button { display: inline-table; float: right; }
+
+html .heading-placeholder, body .heading-placeholder, md-content .heading-placeholder { padding: 0 30px 10px; }
+
+html .heading-placeholder h2, body .heading-placeholder h2, md-content .heading-placeholder h2 { margin-bottom: 0; }
+
+html md-sidenav.md-sidenav-left, body md-sidenav.md-sidenav-left, md-content md-sidenav.md-sidenav-left { width: 250px; min-width: 250px; max-width: 250px; }
+
+html md-sidenav.md-sidenav-left md-list, body md-sidenav.md-sidenav-left md-list, md-content md-sidenav.md-sidenav-left md-list { width: 100%; }
+
+html md-sidenav.md-sidenav-left md-list md-item, body md-sidenav.md-sidenav-left md-list md-item, md-content md-sidenav.md-sidenav-left md-list md-item { display: -webkit-inline-box; display: -webkit-inline-flex; display: -ms-inline-flexbox; display: inline-flex; }
+
+html md-sidenav.md-sidenav-left md-list md-item md-item-content a, body md-sidenav.md-sidenav-left md-list md-item md-item-content a, md-content md-sidenav.md-sidenav-left md-list md-item md-item-content a { text-align: left; width: 250px; margin: 0px 0; padding: 4px 0 4px 20px; }
+
+html .md-sidenav-right md-input-container, body .md-sidenav-right md-input-container, md-content .md-sidenav-right md-input-container { width: 100%; }
+
+html #list-card .ordering-buttons, body #list-card .ordering-buttons, md-content #list-card .ordering-buttons { text-align: center; width: 84px; padding: 4px; }
+
+html #list-card .ordering-buttons .md-button.md-icon-button, body #list-card .ordering-buttons .md-button.md-icon-button, md-content #list-card .ordering-buttons .md-button.md-icon-button { margin: 0; }
+
+html #list-card .list-edit-cell, body #list-card .list-edit-cell, md-content #list-card .list-edit-cell { width: 60px; }
+
+html #list-card .alternate, body #list-card .alternate, md-content #list-card .alternate { color: #1e88e5; background-color: #e3f2fd; }
+
+html #list-card .md-toolbar-tools, body #list-card .md-toolbar-tools, md-content #list-card .md-toolbar-tools { color: #1e88e5; border-bottom: 1px rgba(0, 0, 0, 0.12) solid; }
+
+html #list-card .md-toolbar-tools .toolbar-text, body #list-card .md-toolbar-tools .toolbar-text, md-content #list-card .md-toolbar-tools .toolbar-text { line-height: 36px; }
+
+html #list-card .md-toolbar-tools .md-button, body #list-card .md-toolbar-tools .md-button, md-content #list-card .md-toolbar-tools .md-button { min-width: 36px; width: 36px; }
+
+html #list-card .md-toolbar-tools .md-button svg, body #list-card .md-toolbar-tools .md-button svg, md-content #list-card .md-toolbar-tools .md-button svg { fill: rgba(0, 0, 0, 0.541176); }
+
+html #list-card .list-thumbnail, body #list-card .list-thumbnail, md-content #list-card .list-thumbnail { height: 45px !important; width: 45px !important; }
+
+html md-input-container, body md-input-container, md-content md-input-container { width: 100%; }
+
+html md-switch, body md-switch, md-content md-switch { margin: 0; }
+
+html .list-add-btn, body .list-add-btn, md-content .list-add-btn { margin-top: 5px; }
+
+html label.md-datepicker, body label.md-datepicker, md-content label.md-datepicker { color: rgba(0, 0, 0, 0.541176); font-size: 12px; margin-bottom: -12px; margin-left: 3px; z-index: 100; }
+
+html md-datepicker, body md-datepicker, md-content md-datepicker { margin: 5px 0 5px -10px; padding: 20px 0; }
+
+html md-datepicker .md-datepicker-button, body md-datepicker .md-datepicker-button, md-content md-datepicker .md-datepicker-button { display: none; }
+
+html md-datepicker input, body md-datepicker input, md-content md-datepicker input { font-size: 16px; }
+
+html .help-block, body .help-block, md-content .help-block { float: left; margin: -35px 3px 0; font-size: 11px; color: #444; }
+
+html .form-validation-messages, body .form-validation-messages, md-content .form-validation-messages { float: right; color: #dd2c00; font-size: 12px; line-height: 14px; overflow: hidden; -webkit-transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2); transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2); opacity: 1; margin-top: 0; padding: 0px 0 6px; }
+
+html .md-datepicker-validation-messages, body .md-datepicker-validation-messages, md-content .md-datepicker-validation-messages { margin-top: -20px; }
+
+/*# sourceMappingURL=admin.css.map */

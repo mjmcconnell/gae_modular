@@ -1,0 +1,56 @@
+<html lang="en" ng-app="App">
+    <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+        <link rel="stylesheet" href="/static/libs/material-1.1.0-rc.5/angular-material.min.css">
+        <link rel="stylesheet" href="/static/libs/md-data-table-0.10.9/md-data-table.min.css">
+        <link rel="stylesheet" href="/static/css/admin.css">
+
+        {% block extra_head %}{% endblock %}
+
+        <meta name="viewport" content="initial-scale=1" />
+    </head>
+
+    <body layout="column" ng-controller="AppCtrl" ng-cloak>
+
+        <md-content layout="row" flex class="content-wrapper">
+
+            {% include 'admin/includes/sidebar.html' %}
+
+            <div layout="column" flex class="content-wrapper" id="primary-col">
+
+                {% include 'admin/includes/header.html' %}
+
+                <div layout="column" flex>
+                    <md-content>
+
+                        <div class="heading-placeholder">
+                            <h2 class="md-display-2">{{ title }}</h2>
+                            <p class="md-subhead">{{ description }}</p>
+                        </div>
+
+                        {% block content %}{% endblock %}
+
+                    </md-content>
+                </div>
+
+            </div>
+
+        </md-content>
+
+        <!-- Angular Material requires Angular.js Libraries -->
+        <script src="/static/libs/angularjs-1.5.6/angular.min.js"></script>
+        <script src="/static/libs/angularjs-1.5.6/angular-animate.min.js"></script>
+        <script src="/static/libs/angularjs-1.5.6/angular-aria.min.js"></script>
+        <script src="/static/libs/angularjs-1.5.6/angular-messages.min.js"></script>
+
+        <!-- Angular Material Library -->
+        <script src="/static/libs/material-1.1.0-rc.5/angular-material.min.js"></script>
+
+        <script src="/static/libs/md-data-table-0.10.9/md-data-table.min.js"></script>
+
+        <script src="/static/js/admin.js"></script>
+
+        {% block extra_js %}{% endblock %}
+
+    </body>
+</html>

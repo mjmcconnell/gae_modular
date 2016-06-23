@@ -1,32 +1,27 @@
 import collections
-import logging
 
 
 def fetch_routes():
-    return RegisteredModules.fetch_routes()
+    return AdminRegister.fetch_routes()
 
 
-class Module(object):
+class AdminModule(object):
     """A class that holds module information."""
 
-    def __init__(self, name, routes=None, on_load=None):
+    def __init__(self, name, routes, on_load=None):
         self._name = name
         self._routes = routes
-        self._on_load = on_load
 
-        RegisteredModules.modules[self._name] = self
+        AdminRegister.modules[self._name] = self
 
     def load(self):
         """Preform setup steps for module"""
-        if self._name not in RegisteredModules.enabled:
-            logging.info('Enabling module: %s', self._name.upper())
-            RegisteredModules.enabled.add(self._name)
-            if self._on_load:
-                self._on_load()
+        if self._name not in AdminRegister.enabled:
+            AdminRegister.enabled.add(self._name)
 
     @property
     def enabled(self):
-        return self._name in RegisteredModules.enabled
+        return self._name in AdminRegister.enabled
 
     @property
     def routes(self):
@@ -36,7 +31,7 @@ class Module(object):
         return []
 
 
-class RegisteredModules(object):
+class AdminRegister(object):
     """A registry that holds all custom modules."""
 
     modules = collections.OrderedDict()

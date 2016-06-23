@@ -1,19 +1,16 @@
-# Third-party imports
+# third-party imports
 from webapp2 import Route
 
-# Local imports
+# loacl imports
 from base.modules import Module
 
 
 def register_module():
+
     routes = [
-        (
-            r'/admin/pages',
-            'modules.pages.handlers.templates.AdminListTemplateHandler'
-        ),
         Route(
-            '/admin/pages/<key:\w+>',
-            'modules.pages.handlers.templates.AdminListTemplateHandler'
+            r'/admin/pages',
+            'modules.pages.handlers.templates.LisTemplatetHandler'
         ),
     ]
 

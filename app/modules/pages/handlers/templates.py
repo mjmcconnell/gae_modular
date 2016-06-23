@@ -1,16 +1,15 @@
 # Local imports
 from base.handlers.templates import BaseTemplateHandler
 from base.handlers.templates import ModelListTemplatetHandler
-from base.handlers.templates import ModelDetailTemplateHandler
+# from base.handlers.templates import ModelDetailTemplateHandler
+from modules.pages.models import PageNav
 
 
 class PageHandler(BaseTemplateHandler):
     pass
 
 
-class AdminLisTemplatetHandler(ModelListTemplatetHandler):
-    pass
+class LisTemplatetHandler(ModelListTemplatetHandler):
 
-
-class AdminDetailTemplateHandler(ModelDetailTemplateHandler):
-    pass
+    model = PageNav
+    template_name = '/list.html'

@@ -71,19 +71,22 @@ class ModelListTemplatetHandler(BaseTemplateHandler):
     Fetches all the records for the active model and renders the template.
     """
 
+    child_model = None
+    model = None
+    template_name = None
     template_values = None
 
     def get_queryset(self):
         """Fetch all the model records for the active locale
         """
-        dataset = self.model.get_cached_dataset(self.parent_key)
+        dataset = self.model.fetch_cached_dataset()
         if self.child_model:
             for r in dataset:
                 child_parent_key = self.child_model.build_parent_key(
                     self.locale_key.id(),
                     {self.model.__name__: r['id']}
                 )
-                r['children'] = self.child_model.get_cached_dataset(child_parent_key)
+                r['children'] = self.child_model.fetch_cached_dataset(child_parent_key)
 
         return dataset
 
@@ -95,7 +98,7 @@ class ModelListTemplatetHandler(BaseTemplateHandler):
         self.template_values.update({
             'json_records': json.dumps(records),
         })
-        self.render('model/list.html', self.template_values)
+        self.render(self.template_name, self.template_values)
 
 
 class ModelDetailTemplateHandler(BaseTemplateHandler):
@@ -106,6 +109,8 @@ class ModelDetailTemplateHandler(BaseTemplateHandler):
     """
 
     form = None
+    model = None
+    template_values = None
 
     def _get_record(self):
         """Fetches a record using the key, passed into the url.

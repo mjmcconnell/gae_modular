@@ -1,0 +1,39 @@
+<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+    <md-list class="nav-list">
+        <md-item>
+            <md-item-content>
+                <md-button {% if request.path.startswith(uri_for('admin-pages-list')) %} class="selected"{% endif %} href="{{uri_for('admin-pages-list')}}">
+                    Pages
+                </md-button>
+            </md-item-content>
+        </md-item>
+        <md-item>
+            <md-item-content>
+                <md-button {% if request.path.startswith(uri_for('admin-images-list')) %} class="selected"{% endif %} href="{{uri_for('admin-images-list')}}">
+                    Images
+                </md-button>
+            </md-item-content>
+        </md-item>
+        <md-item>
+            <md-item-content>
+                <md-button {% if request.path.startswith(uri_for('admin-events-list')) %} class="selected"{% endif %} href="{{uri_for('admin-events-list')}}">
+                    Events
+                </md-button>
+            </md-item-content>
+        </md-item>
+        <md-item>
+            <md-item-content>
+                <md-button {% if request.path.startswith(uri_for('admin-workshops-list')) %} class="selected"{% endif %} href="{{uri_for('admin-workshops-list')}}">
+                    Workshops
+                </md-button>
+            </md-item-content>
+        </md-item>
+        <md-item>
+            <md-item-content>
+                <md-button {% if request.path.startswith(uri_for('admin-about_modules-list')) %} class="selected"{% endif %} href="{{uri_for('admin-about_modules-list')}}">
+                    About Modules
+                </md-button>
+            </md-item-content>
+        </md-item>
+    </md-list>
+</md-sidenav>

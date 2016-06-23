@@ -4,7 +4,7 @@ from modules.gallery.models import GalleryPage
 
 def register_module():
     routes = [
-        (r'/gallery', 'modules.gallery.handlers.templates.Frontend'),
+        (r'/gallery', 'modules.gallery.handlers.TemplateHandler'),
     ]
 
     def on_load():
