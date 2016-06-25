@@ -1,11 +1,3 @@
-# local imports
-from base.handlers.templates import ModelListTemplatetHandler
-from base.handlers.templates import ModelDetailTemplateHandler
+class TemplatetHandler(object):
 
-
-class LisTemplatetHandler(ModelListTemplatetHandler):
-    pass
-
-
-class DetailTemplateHandler(ModelDetailTemplateHandler):
-    pass
+    template_name = '/admin.html'

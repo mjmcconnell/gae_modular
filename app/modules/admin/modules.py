@@ -2,36 +2,41 @@ import collections
 
 
 def fetch_routes():
-    return AdminRegister.fetch_routes()
+    return AdminModules.fetch_routes()
+
+
+class InvalidActionFoundException(Exception):
+    pass
 
 
 class AdminModule(object):
     """A class that holds module information."""
 
-    def __init__(self, name, routes, on_load=None):
+    ROUTES = []
+
+    def __init__(self, name, label=None, routes=None):
         self._name = name
-        self._routes = routes
+        self._label = label
 
-        AdminRegister.modules[self._name] = self
-
-    def load(self):
-        """Preform setup steps for module"""
-        if self._name not in AdminRegister.enabled:
-            AdminRegister.enabled.add(self._name)
+        if routes:
+            self.ROUTES = routes
 
     @property
     def enabled(self):
-        return self._name in AdminRegister.enabled
+        return self._name in AdminModules.enabled
 
     @property
     def routes(self):
         """Module specific routes"""
-        if self._routes:
-            return self._routes
-        return []
+        return self.ROUTES
+
+    def load(self):
+        """Preform setup steps for module"""
+        if self._name not in AdminModules.enabled:
+            AdminModules.enabled.add(self._name)
 
 
-class AdminRegister(object):
+class AdminModules(object):
     """A registry that holds all custom modules."""
 
     modules = collections.OrderedDict()

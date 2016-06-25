@@ -1,20 +1,19 @@
-# third-party imports
-from webapp2 import Route
-
 # loacl imports
 from base.modules import Module
+from modules.admin.modules import AdminModule
 
 
 def register_module():
 
-    routes = [
-        Route(
-            r'/admin/pages',
-            'modules.pages.handlers.templates.LisTemplatetHandler'
-        ),
-    ]
+    def on_load():
+        AdminModule(
+            name='pages',
+            label='Pages',
+            template_actions=['list', 'detail'],
+            # api_actions=['read', 'update', 'delete']
+        ).load()
 
     return Module(
         name='pages',
-        routes=routes
+        on_load=on_load
     )

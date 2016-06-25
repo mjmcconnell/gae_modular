@@ -1,6 +1,9 @@
+# future imports
+from __future__ import absolute_import
+
 # Local imports
 from base.modules import Module
-from modules.admin.registry import fetch_routes
+from modules.admin.modules import fetch_routes
 
 
 def register_module():
