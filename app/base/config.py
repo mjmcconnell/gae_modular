@@ -11,6 +11,11 @@ from base.models import get_session_key
 SERVER_SOFTWARE = os.environ.get('SERVER_SOFTWARE', 'Development')
 DEBUG = SERVER_SOFTWARE.startswith('Development')
 
+
+# Directory of the "core" module, used for global templates
+BASE_DIR = os.path.join(os.path.dirname(__file__), os.pardir)
+BASE_TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+
 # fetch the app id for the serviing app
 try:
     APP_ID = app_identity.get_application_id()

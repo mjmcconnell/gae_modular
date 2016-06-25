@@ -1,29 +1,18 @@
+# future imports
+from __future__ import absolute_import
+
 # stdlib imports
 import collections
-
-# local imports
-from base.utils.routes import MultiPrefixRoute
 
 
 def fetch_routes():
     return PageModules.fetch_routes()
 
 
-class InvalidActionFoundException(Exception):
-    pass
-
-
-class AdminModule(object):
+class PageModule(object):
     """A class that holds module information."""
 
     ROUTES = []
-    ALLOWED_API_ACTIONS = [
-        'list',
-        'read',
-        'update',
-        'delete',
-    ]
-    ALLOWED_TEMPLATE_ACTIONS = ['list', 'detail']
 
     def __init__(self, name, label):
         self._name = name
@@ -42,36 +31,6 @@ class AdminModule(object):
         """Preform setup steps for module"""
         if self._name not in PageModules.enabled:
             PageModules.enabled.add(self._name)
-
-    def _set_api_routes(self, actions):
-        routes = []
-        for action in actions:
-            if action not in self.ALLOWED_API_ACTIONS:
-                raise InvalidActionFoundException(
-                    'Invalid action api %s found', action)
-            routes.append('{}ApiHandler'.fomat(action.capitalize()))
-
-        self.ROUTES = self.ROUTES + MultiPrefixRoute(
-            handler_pfx='modules.pages.handlers.apis.',
-            name_pfx='api-pages-{}-'.format(self._name),
-            path_pfx='/api/pages/{}'.format(self._name),
-            routes=routes
-        ).routes
-
-    def _set_template_routes(self, actions):
-        routes = []
-        for action in actions:
-            if action not in self.ALLOWED_TEMPLATE_ACTIONS:
-                raise InvalidActionFoundException(
-                    'Invalid action template %s found', action)
-            routes.append('{}TemplateHandler'.fomat(action.capitalize()))
-
-        self.ROUTES = self.ROUTES + MultiPrefixRoute(
-            handler_pfx='modules.admin.handlers.templates.',
-            name_pfx='admin-{}-template-'.format(self._name),
-            path_pfx='/admin/{}'.format(self._name),
-            routes=routes
-        ).routes
 
 
 class PageModules(object):

@@ -17,17 +17,11 @@ from base.handlers.common import BaseHandler
 
 class BaseTemplateHandler(BaseHandler):
 
+    TEMPLATE_DIRS = []
+
     @webapp2.cached_property
     def jinja2(self):
-        # Directory of the "core" module, used for global templates
-        base_dir = os.path.join(os.path.dirname(__file__))
-        # Directory of the handler used for rendering the template,
-        # for module specific templates
-        current_dir = os.path.dirname(inspect.getfile(self.__class__))
-
-        dirs = [base_dir, current_dir]
-        template_dirs = [os.path.join(x, os.pardir, 'templates') for x in dirs]
-
+        template_dirs = [config.BASE_TEMPLATE_DIR] + self.TEMPLATE_DIRS
         extensions = ['jinja2.ext.autoescape', 'jinja2.ext.with_']
         env = jinja2.Environment(
             autoescape=True,

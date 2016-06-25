@@ -7,7 +7,6 @@ import webapp2
 from base import config
 from base import modules
 
-
 app = webapp2.WSGIApplication(
     routes=modules.fetch_routes(),
     debug=config.DEBUG,

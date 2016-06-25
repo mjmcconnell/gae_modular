@@ -1,5 +1,7 @@
+# local imports
 from base.modules import Module
 from modules.gallery.models import GalleryPage
+from modules.pages.modules import PageModule
 
 
 def register_module():
@@ -11,6 +13,10 @@ def register_module():
         """Register the page
         """
         GalleryPage.register()
+        PageModule(
+            name='gallery',
+            label='Gallery',
+        )
 
     return Module(
         name='gallery',

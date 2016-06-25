@@ -1,0 +1,98 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+
+
+<div ng-init="records.data = {{ json_records }}"></div>
+
+<md-card id="list-card">
+
+    <md-toolbar class="md-table-toolbar {[options.rowSelection && selected.length ? 'alternate' : 'md-default']}" ng-show="options.rowSelection && selected.length">
+        <div class="md-toolbar-tools" layout="row" flex>
+            <span>
+                {[selected.length]} {[selected.length > 1 ? 'items' : 'item']} selected
+            </span>
+            <div flex></div>
+            <md-button aria-label="Delete Selected" ng-click="deleteSelected()">
+                <md-icon md-svg-src="/static/img/icons/ic_delete_black_24px.svg"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-toolbar class="md-table-toolbar {[options.rowSelection && selected.length ? 'alternate' : 'md-default']}" ng-hide="options.rowSelection && selected.length">
+        <div class="md-toolbar-tools" layout="row" flex>
+            <span>
+                {{ title }}
+            </span>
+            <div flex></div>
+            <md-button aria-label="Add" href="./{{ type|lower }}/add">
+                <md-icon class="list-add-btn" md-svg-src="/static/img/icons/ic_add_black_24px.svg"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-table-container>
+        <table md-table md-row-select="options.rowSelection" ng-model="selected" md-progress="promise">
+            <thead md-head md-order="query.order">
+                <tr md-row>
+                    {% for name, props in fields %}
+                        <th md-column{% if props.type == 'numeric' %} md-numeric{% endif %}
+                        {% if loop.index  < 3 and loop.index > 1 or props.type == 'ordering'%}
+                                hide show-gt-xs
+                            {% elif not loop.first %}
+                                hide show-gt-sm
+                            {% endif %}
+                            {% if props.type == 'ordering' %} class="ordering-buttons"{% endif %}
+                        ><span>{{ props.label }}</span></th>
+                    {% endfor %}
+                    <th md-column><span></span></th>
+                </tr>
+            </thead>
+            <tbody md-body>
+                <tr md-row md-select="record" md-auto-select="options.autoSelect" ng-repeat="record in records.data | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                    {% for name, props in fields %}
+                        <td md-cell
+                            {% if loop.index  < 3 and loop.index > 1 or props.type == 'ordering' %}
+                                hide show-gt-xs
+                            {% elif not loop.first %}
+                                hide show-gt-sm
+                            {% endif %}
+                            {% if props.type == 'ordering' %} class="ordering-buttons"{% endif %}
+                        >
+                        {% if props.type %}
+                            {% if props.type == 'link' %}
+                                <a href="{[ record.{{ props.link_property }} ]}" target="_blank">{[record.{{ name }}]}</a>
+                            {% elif props.type == 'visible' %}
+                                    <md-icon md-svg-icon="/static/img/icons/ic_visibility_{[record.{{ name }} ? '' : 'off_']}black_24px.svg"></md-icon>
+                            {% elif props.type == 'image' %}
+                                <img src="{[ record.{{ name }} ]}" class="list-thumbnail">
+                            {% elif props.type == 'ordering' %}
+                                <md-button ng-hide="$first" class="md-icon-button" ng-click="reorder($event, record, -1)" aria-label="Move up">
+                                    <md-icon md-svg-icon="/static/img/icons/ic_keyboard_arrow_up_black_24px.svg"></md-icon>
+                                </md-button>
+                                <md-button ng-show="$first == true" class="md-icon-button" aria-label="Move up">
+                                    <md-icon md-svg-icon="/static/img/icons/ic_keyboard_arrow_up_grey_24px.svg"></md-icon>
+                                </md-button>
+                                <md-button ng-hide="$last" class="md-icon-button" ng-click="reorder($event, record, 1)" aria-label="Move down">
+                                    <md-icon md-svg-icon="/static/img/icons/ic_keyboard_arrow_down_black_24px.svg"></md-icon>
+                                </md-button>
+                                <md-button ng-show="$last == true" class="md-icon-button" aria-label="Move down">
+                                    <md-icon md-svg-icon="/static/img/icons/ic_keyboard_arrow_down_grey_24px.svg"></md-icon>
+                                </md-button>
+                            {% endif %}
+                        {% else %}
+                            {[record.{{ name }}]}
+                        {% endif %}
+                        </td md-cell>
+                    {% endfor %}
+                    <td class="align-right list-edit-cell" md-cell {% if sideform %}ng-click="openForm($event, ((query.page-1)*10) + $index)">Edit{% else %}><a href="./{{ type|lower }}/{[record.id]}">Edit</a>{% endif %}</td>
+                </tr>
+            </tbody>
+        </table>
+    </md-table-container>
+
+    <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{[records.count]}" md-page-select="options.pageSelector" md-boundary-links="options.boundaryLinks"></md-table-pagination>
+
+</md-card>
+
+{% endblock%}
