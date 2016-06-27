@@ -14,9 +14,12 @@ class PageModule(object):
 
     ROUTES = []
 
-    def __init__(self, name, label):
+    def __init__(self, name, label, model):
         self._name = name
-        self._label = label
+        self.label = label
+        self.model = model
+
+        PageModules.modules[self._name] = self
 
     @property
     def enabled(self):
@@ -30,6 +33,9 @@ class PageModule(object):
     def load(self):
         """Preform setup steps for module"""
         if self._name not in PageModules.enabled:
+            # Ensure page model contains a live record
+            self.model.register(self.label)
+            # Register the page module
             PageModules.enabled.add(self._name)
 
 
@@ -46,3 +52,12 @@ class PageModules(object):
             if module.enabled:
                 routes += module.routes
         return routes
+
+    @classmethod
+    def page_models(cls):
+        labeled_models = []
+        for module in cls.modules.values():
+            if module.enabled:
+                labeled_models.append((module.label, module.model))
+
+        return labeled_models

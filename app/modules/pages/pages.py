@@ -33,12 +33,6 @@ def register_module():
         ]
     ).routes
 
-    # def on_load():
-    #     AdminModule(
-    #         name='pages',
-    #         label='Pages',
-    #     ).load()
-
     return Module(
         name='pages',
         routes=api_routes + templates_routes

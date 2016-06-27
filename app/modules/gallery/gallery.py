@@ -12,11 +12,11 @@ def register_module():
     def on_load():
         """Register the page
         """
-        GalleryPage.register()
         PageModule(
             name='gallery',
             label='Gallery',
-        )
+            model=GalleryPage
+        ).load()
 
     return Module(
         name='gallery',

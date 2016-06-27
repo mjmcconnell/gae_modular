@@ -1,5 +1,10 @@
+# future imports
+from __future__ import absolute_import
+
+# local imports
 from base.modules import Module
 from modules.home.models import HomePage
+from modules.pages.modules import PageModule
 
 
 def register_module():
@@ -10,7 +15,11 @@ def register_module():
     def on_load():
         """Register the page
         """
-        HomePage.register()
+        PageModule(
+            name='home',
+            label='Home',
+            model=HomePage
+        ).load()
 
     return Module(
         name='home',

@@ -9,7 +9,6 @@ threadsafe: false
 
 env_variables:
   ENABLED_MODULES:
-    modules.gallery.gallery
     modules.home.home
     modules.pages.pages
     modules.admin.admin
