@@ -4,11 +4,10 @@ from __future__ import absolute_import
 # third-party imports
 from webapp2 import Route
 
-# local imports
-
 # loacl imports
 from base.modules import Module
 from base.utils.routes import MultiPrefixRoute
+from modules.admin.menus import MenuItem
 
 
 def register_module():
@@ -33,7 +32,15 @@ def register_module():
         ]
     ).routes
 
+    def on_load():
+        MenuItem(
+            name='pages',
+            label='Pages',
+            path='/admin/pages',
+        ).add()
+
     return Module(
         name='pages',
+        on_load=on_load,
         routes=api_routes + templates_routes
     )

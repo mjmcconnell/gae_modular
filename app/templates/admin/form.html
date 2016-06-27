@@ -1,7 +1,4 @@
-{% extends 'admin/base.html' %}
 {% set cancel_url = '/'.join(request.url.split('/')[:-1]) %}
-
-{% block content %}
 
 <div ng-init="populateForm({{ json_record }})"></div>
 <div ng-init="cancel_url = '{{ cancel_url }}'"></div>
@@ -17,5 +14,3 @@
     </div>
 
 </form>
-
-{% endblock %}

@@ -28,7 +28,7 @@
                             <p class="md-subhead">{{ description }}</p>
                         </div>
 
-                        {% block content %}{% endblock %}
+                        {{ content|safe }}
 
                     </md-content>
                 </div>

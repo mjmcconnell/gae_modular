@@ -4,10 +4,8 @@
 from __future__ import absolute_import
 
 # stdlib imports
-import inspect
 import jinja2
 import json
-import os
 import webapp2
 
 # local imports

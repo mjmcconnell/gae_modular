@@ -3,8 +3,9 @@ import json
 
 # Local imports
 from base.handlers.templates import BaseTemplateHandler
-# from base.handlers.templates import ModelListTemplatetHandler
-from base.handlers.templates import ModelDetailTemplateHandler
+from modules.admin.handlers import AdminTemplatetHandler
+# from modules.admin.handlers import AdminListTemplatetHandler
+from modules.admin.handlers import AdminDetailTemplatetHandler
 from modules.pages.modules import PageModules
 
 
@@ -12,7 +13,7 @@ class PageHandler(BaseTemplateHandler):
     pass
 
 
-class ListTemplateHandler(BaseTemplateHandler):
+class ListTemplateHandler(AdminTemplatetHandler):
 
     template_name = '/admin/list.html'
 
@@ -36,6 +37,6 @@ class ListTemplateHandler(BaseTemplateHandler):
         self.render(self.template_name, self.template_values)
 
 
-class DetailTemplateHandler(ModelDetailTemplateHandler):
+class DetailTemplateHandler(AdminDetailTemplatetHandler):
 
     template_name = '/admin/form.html'
