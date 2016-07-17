@@ -17,14 +17,6 @@ from base.models import OrderMixin
 logger = logging.getLogger(__name__)
 
 
-class DuplicateTagException(Exception):
-    pass
-
-
-class ExistingTagException(Exception):
-    pass
-
-
 class PageNav(BaseModel, OrderMixin):
     """Records used to displaying links for each page
     """

@@ -9,4 +9,5 @@ from modules.pages.models import PageBaseModel
 
 class HomePage(PageBaseModel):
 
+    # Set page tag to identify the assoicated page naviagation record
     page_tag = 'home'

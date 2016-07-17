@@ -88,7 +88,6 @@ class FormSerialiser(Serialiser):
         form = Form
 
 
-
 class ModelSerialiser(FormSerialiser):
 
     ModelClass = None
@@ -111,8 +110,6 @@ class ModelSerialiser(FormSerialiser):
 
         validators = None
         visible = True
-
-
 
         return field, visible, validators
 

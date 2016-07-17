@@ -37,6 +37,7 @@ def register_module():
             name='pages',
             label='Pages',
             path='/admin/pages',
+            placement=2,
         ).add()
 
     return Module(

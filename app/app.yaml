@@ -11,6 +11,7 @@ env_variables:
   ENABLED_MODULES:
     modules.home.home
     modules.pages.pages
+    modules.admin.admin
 
 libraries:
 - name: jinja2

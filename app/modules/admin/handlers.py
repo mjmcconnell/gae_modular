@@ -3,6 +3,7 @@ from __future__ import absolute_import
 
 # stdlib imports
 import os
+import json
 
 # local imports
 from base.handlers.templates import BaseTemplateHandler
@@ -27,9 +28,9 @@ class BaseAdminTemplateHandler(object):
             'admin.html',
             {
                 'content': content,
-                'description': template_values.get('description'),
+                'description': template_values.get('description', ''),
                 'menu_groups': menu_groups,
-                'title': template_values.get('title'),
+                'title': template_values.get('title', ''),
             }
         )
         self.response.out.write(template)
@@ -44,10 +45,23 @@ class AdminTemplatetHandler(
 class AdminListTemplatetHandler(
         BaseAdminTemplateHandler, ModelListTemplatetHandler):
 
-    pass
+    template_name = '/admin/list.html'
 
 
 class AdminDetailTemplatetHandler(
         BaseAdminTemplateHandler, ModelDetailTemplateHandler):
 
-    pass
+    template_name = '/admin/form.html'
+
+
+class TemplateHandler(
+        BaseAdminTemplateHandler, BaseTemplateHandler):
+
+    def get(self):
+
+        template_values = {
+            'title': 'Admin Dashboard',
+            'json_records': json.dumps(Menu.fetch_all()),
+            'list_title': 'Sections'
+        }
+        self.render('/dashboard.html', template_values)

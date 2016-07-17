@@ -1,0 +1,29 @@
+<div ng-init="records.data = {{ json_records }}"></div>
+
+{{json_records}}
+
+<md-card id="list-card">
+
+    <md-toolbar class="md-table-toolbar {[options.rowSelection && selected.length ? 'alternate' : 'md-default']}">
+        <div class="md-toolbar-tools" layout="row" flex>
+            <span>
+                {{ list_title|default('Records') }}
+            </span>
+        </div>
+    </md-toolbar>
+
+    <md-table-container>
+        <table md-table md-row-select="options.rowSelection" ng-model="selected" md-progress="promise">
+            <tbody md-body>
+                <tr md-row md-select="record" md-auto-select="options.autoSelect" ng-repeat="record in records | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                    <td md-cell>
+                        <a href="{[record.path]}">{[record.label]}</a>
+                    </td md-cell>
+                </tr>
+            </tbody>
+        </table>
+    </md-table-container>
+
+    <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{[records.count]}" md-page-select="options.pageSelector" md-boundary-links="options.boundaryLinks"></md-table-pagination>
+
+</md-card>
